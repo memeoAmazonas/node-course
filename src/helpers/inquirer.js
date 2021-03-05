@@ -1,4 +1,4 @@
-require('colors');
+const colors = require('colors');
 const inquirer = require('inquirer');
 const menuOptions = [
     {
@@ -62,16 +62,60 @@ const leerInput = async (message) => {
             type: 'input',
             message,
             name: 'desc',
-            validate(value){
-                if(value.length === 0){
+            validate(value) {
+                if (value.length === 0) {
                     return 'Ingrese un valor';
                 }
                 return true;
             }
         }
     ];
-    const { desc } = await inquirer.prompt(question);
+    const {desc} = await inquirer.prompt(question);
     return desc;
 
 }
-module.exports = {inquirerMenu, pause, leerInput};
+
+
+const listadoTareasBorrar = async (tareas) => {
+    const choices = tareas.map((item, index) => ({value: item.id, name: `${colors.green(index + 1)}. ${item.desc}`}));
+    choices.unshift({
+        value: '0',
+        name: 'Cancelar',
+    })
+    const question = [{
+        type: "list",
+        name: "id",
+        message: "Seleccione una tarea para borrar",
+        choices,
+    }];
+    const {id} = await inquirer.prompt(question);
+    return id;
+}
+const confirm = async (message = "") => {
+    const question = [
+        {
+            type: 'confirm',
+            name: 'ok',
+            message,
+        }
+    ]
+    const {ok} = await inquirer.prompt(question);
+    return ok;
+
+}
+const mostrarListadoCheckList  = async (tareas) => {
+    const choices = tareas.map((item, index) => ({
+        value: item.id,
+        name: `${colors.green(index + 1)}. ${item.desc}`,
+        checked: item.completadoEn || false,
+    }));
+    const question = [{
+        type: "checkbox",
+        name: "ids",
+        message: "Seleccione",
+        choices,
+    }];
+    const {ids} = await inquirer.prompt(question);
+    return ids;
+}
+module.exports = {inquirerMenu, pause, leerInput, listadoTareasBorrar, confirm, mostrarListadoCheckList};
