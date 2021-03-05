@@ -1,5 +1,4 @@
-/node_modules/
-/src/db/data.json
 /.idea/
+node_modules/
 /03-bases-node/yargs/node_modules/
 /03-bases-node/files/write-file/*.txt
