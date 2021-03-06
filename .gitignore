@@ -1,9 +1,4 @@
 /.idea/
 node_modules/
-/03-bases-node/yargs/node_modules/
-/03-bases-node/files/write-file/*.txt
 package-lock.json
 yarn.lock
-.env
-
-/05-app-clima/data.json

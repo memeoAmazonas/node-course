@@ -4,10 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start-http-pure": "nodemon src/app-http-puro.js",
-    "start-express-road-template": "nodemon src/app-express-road-template.js",
-    "start-express-handlebars": "nodemon src/app-express-handlebars.js",
-    "start": "node src/app-express-handlebars.js",
+    "start": "node src/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
