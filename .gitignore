@@ -6,4 +6,4 @@ package-lock.json
 yarn.lock
 .env
 
-/05-appExpressHandlebars-clima/data.json
+/05-app-clima/data.json
