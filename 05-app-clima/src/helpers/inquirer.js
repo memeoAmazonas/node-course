@@ -7,39 +7,22 @@ const menuOptions = [
         message: 'Que desea hacer',
         choices: [
             {
-                value: '1',
-                name: `${"1.".green} Crear tareas`,
+                value: 1,
+                name: `${"1.".green} Buscar Ciudad`,
             },
             {
-                value: '2',
-                name: `${"2.".green} Listar tareas`,
+                value: 2,
+                name: `${"2.".green} Historial`,
 
             },
             {
-                value: '3',
-                name: `${"3.".green} Listar tareas completadas`,
-            },
-            {
-                value: '4',
-                name: `${"4.".green} Listar tareas pendientes`,
-            },
-            {
-                value: '5',
-                name: `${"5.".green} Completar tarea(s)`,
-
-            },
-            {
-                value: '6',
-                name: `${"6.".green} Borrar tarea(s)`,
-            },
-            {
-                value: '0',
+                value: 0,
                 name: `${"0.".green} Salir \n`,
             }
         ]
     }
 ]
-const inquirerMenu = async () => {
+const menu = async () => {
     console.log("======================".green);
     console.log("Seleccione una opcion".blue);
     console.log("======================\n".green);
@@ -64,7 +47,7 @@ const leerInput = async (message) => {
             name: 'desc',
             validate(value) {
                 if (value.length === 0) {
-                    return 'Ingrese un valor';
+                    return 'Ingrese un valor valido';
                 }
                 return true;
             }
@@ -76,16 +59,16 @@ const leerInput = async (message) => {
 }
 
 
-const listadoTareasBorrar = async (tareas) => {
-    const choices = tareas.map((item, index) => ({value: item.id, name: `${colors.green(index + 1)}. ${item.desc}`}));
+const listarCiudades = async (ciudades) => {
+    const choices = ciudades.map((item, index) => ({value: item.id, name: `${colors.green(index + 1)}. ${item.name}`}));
     choices.unshift({
         value: '0',
-        name: 'Cancelar',
+        name: '0.'.green + 'Cancelar',
     })
     const question = [{
         type: "list",
         name: "id",
-        message: "Seleccione una tarea para borrar",
+        message: "Seleccione una ciudad",
         choices,
     }];
     const {id} = await inquirer.prompt(question);
@@ -118,4 +101,4 @@ const mostrarListadoCheckList  = async (tareas) => {
     const {ids} = await inquirer.prompt(question);
     return ids;
 }
-module.exports = {inquirerMenu, pause, leerInput, listadoTareasBorrar, confirm, mostrarListadoCheckList};
+module.exports = {menu, pause, leerInput, listarCiudades, confirm, mostrarListadoCheckList};
